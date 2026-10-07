@@ -1,0 +1,29 @@
+{
+  "name": "nagori-template",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.21.1"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "new-post": "node scripts/new-post.mjs",
+    "build": "astro check && astro build && pagefind --site dist",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@astrojs/markdown-remark": "^7.2.4",
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.3",
+    "@openfonts/noto-sans-jp_japanese": "^1.44.6",
+    "astro": "^7.2.9",
+    "pagefind": "^1.5.2",
+    "satori": "^0.33.4",
+    "sharp": "^0.35.4",
+    "typescript": "^6.0.3",
+    "unist-util-visit": "^5.1.0"
+  },
+  "type": "module"
+}

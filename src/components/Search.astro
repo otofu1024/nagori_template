@@ -1,0 +1,79 @@
+<div class="search-panel" data-search-root>
+  <form class="search-form" role="search">
+    <label for="search-input">ノートを検索</label>
+    <div class="search-input-row">
+      <input id="search-input" placeholder="Astro、映画、日々のこと…" />
+      <button type="submit">検索</button>
+    </div>
+  </form>
+  <p class="search-status" role="status">キーワードを入力してください。</p>
+  <div class="search-results"></div>
+</div>
+
+<script>
+  type SearchResult = {
+    url: string;
+    excerpt: string;
+    meta: { title?: string };
+  };
+
+  type PagefindResult = { data: () => Promise<SearchResult> };
+  type Pagefind = { search: (query: string) => Promise<{ results: PagefindResult[] }> };
+
+  // Viteにバンドルさせないため、変数パスで動的importする
+  async function loadPagefind(): Promise<Pagefind | null> {
+    try {
+      const pagefindPath = `${import.meta.env.BASE_URL}pagefind/pagefind.js`;
+      return (await import(/* @vite-ignore */ pagefindPath)) as Pagefind;
+    } catch {
+      return null;
+    }
+  }
+
+  const root = document.querySelector<HTMLElement>('[data-search-root]');
+  if (root) {
+    const form = root.querySelector<HTMLFormElement>('.search-form')!;
+    const input = root.querySelector<HTMLInputElement>('#search-input')!;
+    const statusEl = root.querySelector<HTMLElement>('.search-status')!;
+    const resultsEl = root.querySelector<HTMLElement>('.search-results')!;
+
+    // 結果一覧を描画する(タイトルはtextContent、excerptはPagefindのHTMLをそのまま挿入)
+    const renderResults = (data: SearchResult[]) => {
+      resultsEl.replaceChildren(
+        ...data.map((result) => {
+          const link = document.createElement('a');
+          link.className = 'search-result';
+          link.href = result.url;
+          const title = document.createElement('span');
+          title.textContent = result.meta.title ?? '無題のノート';
+          const excerpt = document.createElement('p');
+          excerpt.innerHTML = result.excerpt;
+          link.append(title, excerpt);
+          return link;
+        }),
+      );
+    };
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const term = input.value.trim();
+      if (!term) return;
+
+      statusEl.textContent = '検索しています…';
+      const pagefind = await loadPagefind();
+      if (!pagefind) {
+        statusEl.textContent = '検索インデックスは公開版で利用できます。';
+        return;
+      }
+
+      try {
+        const response = await pagefind.search(term);
+        const data = await Promise.all(response.results.slice(0, 8).map((result) => result.data()));
+        renderResults(data);
+        statusEl.textContent = data.length ? `${data.length}件見つかりました。` : '該当するノートはありません。';
+      } catch {
+        statusEl.textContent = '検索に失敗しました。少し待ってから、もう一度お試しください。';
+      }
+    });
+  }
+</script>

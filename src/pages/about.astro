@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { CATEGORIES, SITE } from '../config';
+---
+
+<BaseLayout title="このブログについて" description={`${SITE.title}と、書いている人について。`}>
+  <article class="about-page" data-pagefind-ignore>
+    <header class="page-header">
+      <h1>{SITE.title}</h1>
+      <p>{SITE.description}</p>
+    </header>
+
+    <div class="about-grid">
+      {Object.values(CATEGORIES).map((category) => (
+        <section>
+          <h2>{category.label}</h2>
+          <p>{category.description}</p>
+        </section>
+      ))}
+    </div>
+
+    <section class="author-note">
+      <div>
+        <p class="author-label">書いている人</p>
+        <h2>{SITE.author}</h2>
+        <p>{SITE.title}は、{SITE.author}が運営するブログです。</p>
+      </div>
+    </section>
+  </article>
+</BaseLayout>

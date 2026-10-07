@@ -1,0 +1,33 @@
+---
+import { CATEGORIES, type Category } from '../config';
+
+interface Props {
+  title: string;
+  category: Category;
+  titleLines?: string[];
+}
+
+const { title, category, titleLines } = Astro.props;
+const coverTitleLines = titleLines?.filter((line) => line.trim()) ?? [title];
+const visualLengthOf = (value: string) =>
+  [...value].reduce(
+    (length, character) => length + (/^[\x00-\x7F]$/.test(character) ? 0.55 : 1),
+    0,
+  );
+const visualLength = visualLengthOf(title);
+const longestLine = Math.max(...coverTitleLines.map(visualLengthOf));
+const titleSize =
+  visualLength > 34 || longestLine > 18
+    ? 'long'
+    : visualLength > 20 || longestLine > 11
+      ? 'medium'
+      : 'short';
+---
+
+<div class={`auto-cover ${category}`} role="img" aria-label={`${title}の記事表紙`}>
+  <span class={`auto-cover-title ${titleSize}`}>
+    {coverTitleLines.map((line) => <span class="auto-cover-title-line">{line}</span>)}
+  </span>
+  <span class="auto-cover-category">{CATEGORIES[category].label}</span>
+  <span class="auto-cover-mark" aria-hidden="true"></span>
+</div>

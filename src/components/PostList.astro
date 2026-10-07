@@ -1,0 +1,50 @@
+---
+import { CATEGORIES } from '../config';
+import ArticleCover from './ArticleCover.astro';
+import { postPath, type Post } from '../lib/posts';
+
+interface Props {
+  posts: Post[];
+}
+
+const { posts } = Astro.props;
+const dateFormatter = new Intl.DateTimeFormat('ja-JP', {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+});
+---
+
+<div class="post-list" data-pagefind-ignore>
+  {posts.map((post) => {
+    const postUrl = postPath(post);
+
+    return (
+      <article class={`post-row post-${post.data.category}`}>
+        <a class="post-row-link" href={postUrl} aria-label={`${post.data.title}を読む`}>
+          <ArticleCover
+            title={post.data.title}
+            category={post.data.category}
+            titleLines={post.data.coverTitleLines}
+          />
+          <div class="post-main">
+            <div class="post-meta">
+              <time datetime={post.data.publishedAt.toISOString()}>
+                {dateFormatter.format(post.data.publishedAt)}
+              </time>
+              <span aria-hidden="true">·</span>
+              <span class={`category-label ${post.data.category}`}>
+                {CATEGORIES[post.data.category].label}
+              </span>
+            </div>
+            <h3>{post.data.title}</h3>
+            <p>{post.data.description}</p>
+          </div>
+          <span class="post-arrow" aria-hidden="true">→</span>
+        </a>
+      </article>
+    );
+  })}
+</div>
+
+{posts.length === 0 && <p class="empty-state">まだノートはありません。</p>}

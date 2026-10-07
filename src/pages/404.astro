@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="ページが見つかりません" description="お探しのページは見つかりませんでした。" noIndex>
+  <section class="not-found" data-pagefind-ignore>
+    <p class="error-code">404</p>
+    <h1>ページが見つかりません</h1>
+    <p>URLが変わったか、ページが削除された可能性があります。</p>
+    <a class="primary-link" href="/">トップへ戻る</a>
+  </section>
+</BaseLayout>

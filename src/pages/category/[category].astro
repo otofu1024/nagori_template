@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostList from '../../components/PostList.astro';
+import { CATEGORIES, type Category } from '../../config';
+import { getPublishedPosts, type Post } from '../../lib/posts';
+
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+  return Object.entries(CATEGORIES).map(([key, category]) => ({
+    params: { category: key },
+    props: {
+      category,
+      posts: posts.filter((post) => post.data.category === key),
+    },
+  }));
+}
+
+interface Props {
+  category: (typeof CATEGORIES)[Category];
+  posts: Post[];
+}
+
+const { category, posts } = Astro.props;
+---
+
+<BaseLayout title={category.label} description={category.description}>
+  <header class="page-header category-page" data-pagefind-ignore>
+    <h1>{category.label}</h1>
+    <p>{category.description}</p>
+  </header>
+  <section class="post-section compact">
+    <div class="section-heading"><h2>{category.label}の記事</h2></div>
+    <PostList posts={posts} />
+  </section>
+</BaseLayout>

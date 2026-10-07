@@ -1,0 +1,21 @@
+# dependencies
+/node_modules
+
+# Astro
+/.astro/
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+
+# local environment
+.env*
+
+# deployment and generated files
+/dist/
+
+# 開発用のメモ。手元だけに置き、リポジトリには含めない
+CLAUDE.md

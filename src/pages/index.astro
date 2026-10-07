@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getPublishedPosts } from '../lib/posts';
+import { SITE } from '../config';
+import PostList from '../components/PostList.astro';
+
+const posts = await getPublishedPosts();
+---
+
+<BaseLayout>
+  <section class="hero">
+    <div class="hero-copy">
+      <h1>{SITE.title}</h1>
+      <span class="hero-title-rule" aria-hidden="true"></span>
+      <p>{SITE.description}</p>
+      <a class="hero-cta" href="#latest-heading">最近の記事を見る</a>
+    </div>
+  </section>
+
+  <section class="post-section" aria-labelledby="latest-heading">
+    <div class="section-heading">
+      <h2 id="latest-heading">最近の記事</h2>
+      <span class="section-mark" aria-hidden="true"><span class="brand-mark"></span></span>
+    </div>
+    <PostList posts={posts} />
+  </section>
+</BaseLayout>
