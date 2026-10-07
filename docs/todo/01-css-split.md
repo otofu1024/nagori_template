@@ -9,25 +9,25 @@
 
 ### 既知のバグ
 
-- [ ] 980px以下で`.post-row`に`grid-template-columns`を指定しているが、gridは`.post-row-link`に付いているので効いていない。意図した列幅を確認して直す
-- [ ] バグの修正はCSSの分離と別のコミットにして、見た目の比較を分けられるようにする
+- [x] 980px以下で`.post-row`に`grid-template-columns`を指定しているが、gridは`.post-row-link`に付いているので効いていない。意図した列幅を確認して直す
+- [x] バグの修正はCSSの分離と別のコミットにして、見た目の比較を分けられるようにする
 
 ### 分け方
 
-- [ ] `src/styles/template.css`を作り、全体を`@layer template`で包む
-- [ ] `src/theme/theme.css`を作り、レイヤーの外で読み込む
-- [ ] `BaseLayout.astro`のimportを差し替える
-- [ ] 宣言ごとに、レイアウトに関わるものはテンプレート側、見た目だけのものは`theme.css`に振り分ける
-- [ ] `theme.css`に移したルールは`:where()`で包み、詳細度を下げる。包んだあとにルールの順番で優先順位が変わらないか確認する
-- [ ] `prefers-reduced-motion`の`!important`はテンプレート側に残す
-- [ ] 装飾用の空き要素を非表示にするルールは`theme.css`に置く。テーマが装飾を描くときは、このルールを消して書き換える
+- [x] `src/styles/template.css`を作り、全体を`@layer template`で包む
+- [x] `src/theme/theme.css`を作り、レイヤーの外で読み込む
+- [x] `BaseLayout.astro`のimportを差し替える
+- [x] 宣言ごとに、レイアウトに関わるものはテンプレート側、見た目だけのものは`theme.css`に振り分ける
+- [x] `theme.css`に移したルールは`:where()`で包み、詳細度を下げる。包んだあとにルールの順番で優先順位が変わらないか確認する
+- [x] `prefers-reduced-motion`の`!important`はテンプレート側に残す
+- [x] 装飾用の空き要素を非表示にするルールは`theme.css`に置く。テーマが装飾を描くときは、このルールを消して書き換える
 
 ### トークン
 
-- [ ] 仕様書にある13個のトークンを`theme.css`の先頭の`:root`に書く
-- [ ] `--color-link`と`--color-link-hover`を追加し、本文リンクの色をこの2つから取るようにする
-- [ ] OGP用の3色は、03で読み取りを実装するまで値だけ置いておく
-- [ ] トークンにしない色、角丸、影は、`theme.css`にセレクタごと直接書く
+- [x] 仕様書にある13個のトークンを`theme.css`の先頭の`:root`に書く
+- [x] `--color-link`と`--color-link-hover`を追加し、本文リンクの色をこの2つから取るようにする
+- [x] OGP用の3色は、03で読み取りを実装するまで値だけ置いておく
+- [x] トークンにしない色、角丸、影は、`theme.css`にセレクタごと直接書く
 
 ## 完了条件
 
