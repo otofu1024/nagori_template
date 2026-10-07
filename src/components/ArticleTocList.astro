@@ -1,0 +1,40 @@
+---
+interface TocItem {
+  depth: number;
+  slug: string;
+  text: string;
+  children: TocItem[];
+}
+
+interface Props {
+  items: TocItem[];
+  prefix?: number[];
+}
+
+const { items, prefix = [] } = Astro.props;
+const isRoot = prefix.length === 0;
+---
+
+<ol
+  class:list={[
+    'article-toc__list',
+    { 'article-toc__list--root': isRoot, 'article-toc__list--nested': !isRoot },
+  ]}
+>
+  {items.map((item, index) => {
+    const numberParts = [...prefix, index + 1];
+
+    return (
+      <li class={`article-toc__depth-${item.depth}`}>
+        <a href={`#${item.slug}`} data-toc-link>
+          <span class="article-toc__number">{numberParts.join('.')}</span>
+          <span class="article-toc__text">{item.text}</span>
+          <span class="article-toc__arrow" aria-hidden="true">›</span>
+        </a>
+        {item.children.length > 0 && (
+          <Astro.self items={item.children} prefix={numberParts} />
+        )}
+      </li>
+    );
+  })}
+</ol>

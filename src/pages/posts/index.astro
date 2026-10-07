@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getPublishedPosts } from '../../lib/posts';
+import { SITE } from '../../config';
+import PostList from '../../components/PostList.astro';
+
+const posts = await getPublishedPosts();
+---
+
+<BaseLayout title="すべてのノート" description={`${SITE.title}に書いた記事の一覧。`}>
+  <header class="page-header" data-pagefind-ignore>
+    <h1>すべてのノート</h1>
+    <p>日常と技術と、作品について。これまでに書いたものを新しい順に並べています。</p>
+  </header>
+  <section class="post-section compact">
+    <div class="section-heading"><h2>記事一覧</h2></div>
+    <PostList posts={posts} />
+  </section>
+</BaseLayout>

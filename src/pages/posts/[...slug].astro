@@ -1,0 +1,216 @@
+---
+import { render } from 'astro:content';
+import { getImage } from 'astro:assets';
+import ArticleTocList from '../../components/ArticleTocList.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { CATEGORIES, SITE } from '../../config';
+import { getPublishedPosts, postPath, postSlug, type Post } from '../../lib/posts';
+
+export async function getStaticPaths() {
+  // 前後ナビは古い順で考えるため、新しい順の一覧を反転する
+  const posts = (await getPublishedPosts()).reverse();
+
+  return posts.map((post, index) => ({
+    params: { slug: postSlug(post) },
+    props: {
+      post,
+      previousPost: posts[index - 1] ?? null,
+      nextPost: posts[index + 1] ?? null,
+    },
+  }));
+}
+
+interface Props {
+  post: Post;
+  previousPost: Post | null;
+  nextPost: Post | null;
+}
+
+const { post, previousPost, nextPost } = Astro.props;
+const { Content, headings } = await render(post);
+const category = CATEGORIES[post.data.category];
+const slug = postSlug(post);
+// 所要時間の目安: 空白を除いた本文の文字数を 1 分 500 文字として切り上げる（最小 1 分）
+const readingMinutes = Math.max(1, Math.ceil((post.body ?? '').replace(/\s/g, '').length / 500));
+const cover = post.data.cover
+  ? await getImage({ src: post.data.cover, width: 1200, height: 675, format: 'webp' })
+  : null;
+const articleUrl = new URL(Astro.url.pathname, Astro.site);
+const socialImage = new URL(`/og/${slug}.png`, Astro.site).toString();
+const articleTitleLines = post.data.coverTitleLines ?? [post.data.title];
+const tableOfContents = headings.filter((heading) => heading.depth >= 2 && heading.depth <= 4);
+type TocItem = (typeof tableOfContents)[number] & { children: TocItem[] };
+const tableOfContentsTree: TocItem[] = [];
+const tableOfContentsStack: TocItem[] = [];
+
+for (const heading of tableOfContents) {
+  const item: TocItem = { ...heading, children: [] };
+
+  while (
+    tableOfContentsStack.length > 0 &&
+    tableOfContentsStack[tableOfContentsStack.length - 1].depth >= heading.depth
+  ) {
+    tableOfContentsStack.pop();
+  }
+
+  const parent = tableOfContentsStack[tableOfContentsStack.length - 1];
+  (parent ? parent.children : tableOfContentsTree).push(item);
+  tableOfContentsStack.push(item);
+}
+const dateFormatter = new Intl.DateTimeFormat('ja-JP', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.publishedAt.toISOString(),
+  dateModified: (post.data.updatedAt ?? post.data.publishedAt).toISOString(),
+  author: { '@type': 'Person', name: SITE.author },
+  mainEntityOfPage: articleUrl.toString(),
+  image: socialImage,
+};
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  image={socialImage}
+  imageAlt={`${post.data.title}の記事画像`}
+  imageWidth={1200}
+  imageHeight={630}
+  ogType="article"
+  publishedAt={post.data.publishedAt}
+  updatedAt={post.data.updatedAt ?? post.data.publishedAt}
+  tags={post.data.tags}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <div class="article-layout">
+    <article class="article" data-pagefind-body>
+      <header class="article-header">
+        <a class={`category-label ${post.data.category}`} href={`/category/${post.data.category}/`}>
+          {category.label}
+        </a>
+        <h1 data-pagefind-meta="title" aria-label={post.data.title}>
+          {articleTitleLines.map((line, index) => (
+            <span class="article-title-line">
+              {line}{index < articleTitleLines.length - 1 ? ' ' : ''}
+            </span>
+          ))}
+        </h1>
+        <p class="article-description">{post.data.description}</p>
+        <div class="article-dates">
+          <time datetime={post.data.publishedAt.toISOString()}>
+            {dateFormatter.format(post.data.publishedAt)} 公開
+          </time>
+          {post.data.updatedAt && (
+            <time datetime={post.data.updatedAt.toISOString()}>
+              {dateFormatter.format(post.data.updatedAt)} 更新
+            </time>
+          )}
+          <span>約 {readingMinutes} 分で読めます</span>
+        </div>
+        {post.data.tags.length > 0 && (
+          <div class="tag-list" aria-label="タグ">
+            {post.data.tags.map((tag) => <a href={`/tags/${encodeURIComponent(tag)}/`}>#{tag}</a>)}
+          </div>
+        )}
+      </header>
+
+      {cover && (
+        <figure class="article-cover">
+          <img src={cover.src} width={cover.attributes.width} height={cover.attributes.height} alt={post.data.coverAlt || post.data.title} />
+        </figure>
+      )}
+
+      <div class="prose">
+        <Content />
+      </div>
+
+      <footer class="article-footer">
+        {(previousPost || nextPost) && (
+          <nav class="article-pagination" aria-label="前後の記事" data-pagefind-ignore>
+            {previousPost && (
+              <a class="article-pagination__link article-pagination__link--previous" href={postPath(previousPost)}>
+                <span>← 前の記事</span>
+                <strong>{previousPost.data.title}</strong>
+              </a>
+            )}
+            {nextPost && (
+              <a class="article-pagination__link article-pagination__link--next" href={postPath(nextPost)}>
+                <span>次の記事 →</span>
+                <strong>{nextPost.data.title}</strong>
+              </a>
+            )}
+          </nav>
+        )}
+        <a class="article-list-link" href="/posts/">記事一覧へ戻る</a>
+      </footer>
+    </article>
+
+    {tableOfContents.length > 0 && (
+      <aside class="article-toc" aria-label="目次" data-pagefind-ignore>
+        <div class="article-toc__heading">
+          <span class="brand-mark article-toc__mark" aria-hidden="true"></span>
+          <h2>目次</h2>
+        </div>
+        <div class="article-toc__divider" aria-hidden="true">
+          <span class="article-toc__leaf"></span>
+        </div>
+        <ArticleTocList items={tableOfContentsTree} />
+        <div class="article-toc__reading-time">
+          <span class="article-toc__reading-leaf" aria-hidden="true"></span>
+          <span>
+            <span class="article-toc__reading-label">この記事の所要時間（目安）</span>
+            <strong>約 {readingMinutes} 分</strong>
+          </span>
+        </div>
+      </aside>
+    )}
+  </div>
+
+  <script is:inline>
+    const toc = document.querySelector('.article-toc');
+
+    if (toc) {
+      const links = [...toc.querySelectorAll('[data-toc-link]')];
+      const sections = links
+        .map((link) => document.getElementById(decodeURIComponent(link.hash.slice(1))))
+        .filter(Boolean);
+      let ticking = false;
+
+      const updateCurrentHeading = () => {
+        const readingLine = window.innerHeight * 0.3;
+        let current = sections[0];
+
+        for (const section of sections) {
+          if (section.getBoundingClientRect().top <= readingLine) current = section;
+        }
+
+        links.forEach((link) => {
+          const isCurrent = current && link.hash === `#${encodeURIComponent(current.id)}`;
+          link.classList.toggle('is-active', Boolean(isCurrent));
+          if (isCurrent) link.setAttribute('aria-current', 'location');
+          else link.removeAttribute('aria-current');
+        });
+      };
+
+      const requestUpdate = () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          updateCurrentHeading();
+          ticking = false;
+        });
+      };
+
+      updateCurrentHeading();
+      document.addEventListener('scroll', requestUpdate, { passive: true });
+      window.addEventListener('resize', requestUpdate);
+    }
+  </script>
+</BaseLayout>

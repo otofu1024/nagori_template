@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../config';
+import Search from '../components/Search.astro';
+---
+
+<BaseLayout title="検索" description={`${SITE.title}の記事を検索します。`} noIndex>
+  <header class="page-header search-page" data-pagefind-ignore>
+    <h1>ノートを探す</h1>
+    <p>タイトルと本文から、気になる言葉を探せます。</p>
+  </header>
+  <div class="search-page-panel" data-pagefind-ignore>
+    <Search />
+  </div>
+</BaseLayout>
