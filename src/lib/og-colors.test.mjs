@@ -20,3 +20,7 @@ test('形式が違うとエラー', () => {
   assert.throws(() => readOgColors(ok.replace('#1e2a3f', 'red')), /--og-text の値 "red"/);
   assert.throws(() => readOgColors(ok.replace('#FFFFFF', '#fff')), /--og-bg の値 "#fff"/);
 });
+
+test('コメントアウトした行は無視される', () => {
+  assert.deepEqual(readOgColors(ok.replace('{', '{ /* --og-bg: #000000; */')).bg, '#FFFFFF');
+});

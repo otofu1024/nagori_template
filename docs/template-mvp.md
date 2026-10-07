@@ -98,7 +98,7 @@ gridの列構成、`position: sticky`、ブレークポイント、日本語の�
 | `--color-link` | 本文のリンク | `#0a7791` |
 | `--color-link-hover` | 本文リンクのhoverとfocus | `#1e2a3f` |
 | `--font-sans` | 本文とUIのフォント | `"Noto Sans JP"`と日本語向けのシステムフォント |
-| `--og-bg` | OGP画像の背景 | `#e8f6fa` |
+| `--og-bg` | OGP画像の背景 | `#ffffff` |
 | `--og-text` | OGP画像の文字 | `#1e2a3f` |
 | `--og-accent` | OGP画像の強調色 | `#cfeff6` |
 

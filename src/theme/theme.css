@@ -13,7 +13,7 @@
   --font-sans:
     "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
     "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
-  --og-bg: #e8f6fa;
+  --og-bg: #ffffff;
   --og-text: #1e2a3f;
   --og-accent: #cfeff6;
   /* コードブロックの配色。Astroの css-variables テーマが読む */

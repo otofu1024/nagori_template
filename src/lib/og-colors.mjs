@@ -3,7 +3,7 @@ const NAMES = ['bg', 'text', 'accent'];
 
 /** @returns {{ bg: string, text: string, accent: string }} */
 export function readOgColors(css) {
-  const block = /:root\s*\{([^}]*)\}/.exec(css)?.[1] ?? '';
+  const block = /:root\s*\{([^}]*)\}/.exec(css.replace(/\/\*[\s\S]*?\*\//g, ''))?.[1] ?? '';
   const colors = /** @type {any} */ ({});
   for (const name of NAMES) {
     const key = `--og-${name}`;
