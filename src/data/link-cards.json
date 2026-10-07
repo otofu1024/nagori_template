@@ -1,1 +1,10 @@
-{}
+{
+  "https://astro.build/": {
+    "url": "https://astro.build/",
+    "hostname": "astro.build",
+    "title": "Astro",
+    "description": "Astro builds fast content sites, powerful web applications, dynamic server APIs, and everything in-between.",
+    "image": "/link-cards/0ea1e02c7fe5afc1.webp",
+    "fetchedAt": "2026-10-07T15:25:25.008Z"
+  }
+}
