@@ -34,7 +34,6 @@
 | `.site-header` | ヘッダー |
 | `.brand` | サイト名のリンク |
 | `.site-nav` | ナビ。`.site-nav a`、選択中の`.site-nav a.active`を使える |
-| `.nav-icon` | ナビ項目のアイコン |
 
 ### トップ
 

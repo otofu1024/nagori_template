@@ -59,7 +59,6 @@
     position: relative;
     display: inline-flex;
     align-items: center;
-    gap: 0.45rem;
     padding: 0.5rem 0.6rem;
     white-space: nowrap;
   }
@@ -80,7 +79,7 @@
     align-items: center;
     gap: clamp(2rem, 5vw, 5rem);
     margin: 2rem 0 4.5rem;
-    padding: 4.5rem clamp(2rem, 4.5vw, 4rem) 5rem;
+    padding: 4.5rem 0 5rem;
     overflow: hidden;
   }
 
@@ -791,7 +790,7 @@
     }
 
     .hero {
-      padding-inline: 2.5rem;
+      padding-inline: 0;
     }
 
     .post-row-link {
@@ -818,7 +817,7 @@
     .hero {
       display: block;
       margin: 0 0 3.5rem;
-      padding: 1.25rem 1.4rem 3rem;
+      padding: 1.25rem 0 3rem;
     }
 
     .hero-cta {

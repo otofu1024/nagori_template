@@ -36,14 +36,13 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 const socialImage = image ? new URL(image, Astro.site) : null;
 const currentPath = Astro.url.pathname;
 const navItems = [
-  { href: '/posts/', label: 'ノート', icon: '⌂' },
+  { href: '/posts/', label: 'ノート' },
   ...Object.entries(CATEGORIES).map(([key, category]) => ({
     href: `/category/${key}/`,
     label: category.label,
-    icon: category.icon,
   })),
-  { href: '/search/', label: '検索', icon: '⌕' },
-  { href: '/about/', label: 'このブログ', icon: '●' },
+  { href: '/search/', label: '検索' },
+  { href: '/about/', label: 'このブログ' },
 ];
 const isActive = (href: string) => {
   if (href === '/posts/') return currentPath.startsWith('/posts/');
@@ -96,7 +95,6 @@ const isActive = (href: string) => {
               class:list={{ active: isActive(item.href) }}
               aria-current={isActive(item.href) ? 'page' : undefined}
             >
-              <span class="nav-icon" aria-hidden="true">{item.icon}</span>
               {item.label}
             </a>
           ))}
