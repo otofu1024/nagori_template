@@ -44,11 +44,11 @@
 | `.hero-copy` | ヒーローの文章。中の`h1`と`> p`を使える |
 | `.hero-title-rule` | タイトル下の線 |
 | `.hero-cta` | 記事一覧へのリンク |
-| `.section-heading` | 「新着記事」などの節の見出し。中の`h2`を使える |
+| `.section-heading` | 「最近の記事」などの節の見出し。中の`h2`を使える |
 
 ### 記事一覧とカード
 
-記事一覧、カテゴリー別一覧、タグ別一覧、トップの新着で共通です。
+記事一覧、カテゴリー別一覧、タグ別一覧、トップの最近の記事で共通です。
 
 | セレクタ | 対象 |
 |---|---|
@@ -100,12 +100,16 @@
 | セレクタ | 対象 |
 |---|---|
 | `.prose` | 本文全体 |
-| `.prose h2`、`.prose h3`、`.prose h4` | 見出し |
+| `.prose h2`から`.prose h6` | 見出し |
+| `.prose p` | 段落 |
+| `.prose ul`、`.prose ol`、`.prose li` | 箇条書きと番号付きの一覧。記号は`li`の`::marker`で変えられる |
+| `.prose strong`、`.prose em` | 太字と斜体 |
+| `.prose img` | 画像 |
 | `.prose a` | リンク。リンクカードは`.prose a:not(.link-card)`で除ける |
 | `.prose blockquote` | 引用 |
 | `.prose code`、`.prose pre` | インラインコードとコードブロック |
 | `.prose hr` | 区切り線 |
-| `.prose table`、`.prose th`、`.prose td` | 表 |
+| `.prose table`、`.prose thead`、`.prose tr`、`.prose th`、`.prose td` | 表 |
 
 ### リンクカード
 
