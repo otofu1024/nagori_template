@@ -10,7 +10,7 @@
 
 - [x] テンプレートの名前を決める。`nagori_template`にした
 - [x] コードのライセンスを決める。MITにした
-- [ ] `LICENSE`を置き、`package.json`の`license`を`MIT`にする
+- [x] `LICENSE`を置き、`package.json`の`license`を`MIT`にする
 
 ### 中身の整理
 
@@ -19,7 +19,7 @@
 
 ### ドキュメント
 
-- [ ] READMEを書く。最初に、AIに見た目を変えてもらう手順を書く。READMEのPRは、利用者本人がレビューしてからマージする
+- [x] READMEを書く。最初に、AIに見た目を変えてもらう手順を書く。READMEのPRは、利用者本人がレビューしてからマージする
 - [ ] `docs/markdown-guide.md`を見直す
 - [x] デモサイトを公開するか決める。公開しないことにした
 
