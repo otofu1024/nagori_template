@@ -29,7 +29,7 @@ export default defineConfig({
       rehypePlugins: [[rehypeResponsiveImages, { maxWidth: 720, maxHeight: 720 }]],
     }),
     shikiConfig: {
-      theme: 'github-light',
+      theme: 'css-variables',
       wrap: true,
     },
   },
