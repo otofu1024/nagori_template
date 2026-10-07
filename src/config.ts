@@ -11,19 +11,16 @@ export const SITE = {
 export const CATEGORIES = {
   daily: {
     label: "日常",
-    icon: "○",
     description:
       "日々の出来事について書いた記事です。",
   },
   tech: {
     label: "技術",
-    icon: "▤",
     description:
       "技術に関する記事です。",
   },
   review: {
     label: "感想",
-    icon: "✎",
     description: "本や作品の感想を書いた記事です。",
   },
 } as const;

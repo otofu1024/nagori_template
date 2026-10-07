@@ -8,14 +8,14 @@
 
 ### ナビのアイコン
 
-- [ ] ナビの記号のアイコンを外し、文字だけのナビにする
-- [ ] `src/config.ts`の`CATEGORIES`から`icon`を消す。`icon`を使っているほかの箇所もすべて直す
-- [ ] `.nav-icon`のルールを`template.css`と`theme.css`から消す
-- [ ] `docs/theme-contract.md`から`.nav-icon`を消す
+- [x] ナビの記号のアイコンを外し、文字だけのナビにする
+- [x] `src/config.ts`の`CATEGORIES`から`icon`を消す。`icon`を使っているほかの箇所もすべて直す
+- [x] `.nav-icon`のルールを`template.css`と`theme.css`から消す
+- [x] `docs/theme-contract.md`から`.nav-icon`を消す
 
 ### トップの見出しの位置
 
-- [ ] PC幅とスマホ幅で、トップの見出しの左端をヘッダーのロゴの左端にそろえる
+- [x] PC幅とスマホ幅で、トップの見出しの左端をヘッダーのロゴの左端にそろえる
 
 ## 完了条件
 
