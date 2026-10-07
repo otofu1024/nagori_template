@@ -472,6 +472,41 @@
     margin-bottom: 0;
   }
 
+  .prose .talk {
+    display: grid;
+    grid-template-columns: 4.5rem minmax(0, 1fr);
+    align-items: start;
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+
+  .prose .talk__character {
+    width: 100%;
+    height: auto;
+    margin: 0;
+  }
+
+  .prose .talk__bubble {
+    position: relative;
+    min-width: 0;
+    padding: 0.9rem 1.1rem;
+  }
+
+  .prose .talk__bubble > :first-child {
+    margin-top: 0;
+  }
+
+  .prose .talk__bubble > :last-child {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 600px) {
+    .prose .talk {
+      grid-template-columns: 3.25rem minmax(0, 1fr);
+      gap: 0.75rem;
+    }
+  }
+
   .prose .link-card {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
