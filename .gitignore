@@ -1,0 +1,22 @@
+# dependencies
+/node_modules
+
+# Astro
+/.astro/
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+
+# local environment
+.env*
+
+# deployment and generated files
+/dist/
+/.wrangler/
+
+# local editorial reviews
+*akapen*.md
