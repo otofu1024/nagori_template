@@ -142,18 +142,19 @@ AstroのShikiが持つCSS変数の仕組みを使い、`.astro-code`の`--astro-
 
 ```ts
 export const CHARACTERS = {
-  HARU: {
-    name: "ハル",
+  NAGORI: {
+    name: "なごり",
     defaultExpression: "normal",
     expressions: {
-      normal: { src: "/images/haru/normal.png", label: "通常", aliases: ["通常"] },
-      troubled: { src: "/images/haru/troubled.png", label: "困り", aliases: ["confused", "困り"] },
+      normal: { src: "/images/nagori/normal.png", label: "通常", aliases: ["通常"] },
+      // 表情を増やすときは同じ形で書き足す
     },
   },
 } as const;
 ```
 
-この例のキャラクターは説明用です。テンプレートの初期状態では`CHARACTERS`を空にします。
+テンプレートの初期状態には、テンプレートのロゴを使った`NAGORI`をサンプルとして1つだけ入れておきます。表情は`normal`の1つです。
+利用者は、自分のキャラクターに書き換えるか、`CHARACTERS`を空にして機能を無効にできます。
 
 キャラクターのキーには英数字、`_`、`-`だけを使え、大文字にそろえて照合します。
 GitHubのアラート記法とぶつからないよう、`NOTE`、`TIP`、`IMPORTANT`、`WARNING`、`CAUTION`はキーに使えません。
@@ -164,13 +165,13 @@ GitHubのアラート記法とぶつからないよう、`NOTE`、`TIP`、`IMPOR
 出力するHTMLは次の形にします。`data-expression`には、記事で使った別名ではなく正規のキーを入れます。
 
 ```html
-<aside class="talk" data-character="HARU" data-expression="troubled" aria-label="ハル（困り）のひとこと">
-  <img class="talk__character" src="/images/haru/troubled.png" alt="" aria-hidden="true">
+<aside class="talk" data-character="NAGORI" data-expression="normal" aria-label="なごり（通常）のひとこと">
+  <img class="talk__character" src="/images/nagori/normal.png" alt="" aria-hidden="true">
   <div class="talk__bubble"><p>本文</p></div>
 </aside>
 ```
 
-テーマは`.talk__bubble`とその擬似要素で、吹き出しの背景、枠、角丸、尾の形を変えられる設計です。キャラクターごとの指定には`.talk[data-character="HARU"]`を使います。
+テーマは`.talk__bubble`とその擬似要素で、吹き出しの背景、枠、角丸、尾の形を変えられる設計です。キャラクターごとの指定には`.talk[data-character="NAGORI"]`を使います。
 
 ## 配布とアップデート
 
@@ -227,4 +228,3 @@ PC幅とスマホ幅で全種類のページを見て、検索結果、目次の
 - テンプレートの名前。nagoriを仮の名前にしている
 - ライセンス。コードはMITなどを想定している
 - simpleテーマの具体的なデザイン
-- 吹き出しのサンプルに使う、配布できるキャラクター素材

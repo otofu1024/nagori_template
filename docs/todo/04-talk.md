@@ -9,7 +9,8 @@
 
 ### 設定
 
-- [ ] `src/config.ts`に`CHARACTERS`を追加する。初期状態は空にする
+- [ ] `~/Downloads/nagori.png`(1254px四方、691KB)を256px四方に縮小し、`public/images/nagori/normal.png`に置く
+- [ ] `src/config.ts`に`CHARACTERS`を追加し、サンプルの`NAGORI`を1つ入れる
 - [ ] `astro.config.mjs`から、remarkプラグインに`CHARACTERS`を渡す
 - [ ] キャラクターのキーを英数字、`_`、`-`に限る
 - [ ] `NOTE`、`TIP`、`IMPORTANT`、`WARNING`、`CAUTION`をキーに使ったら設定エラーにする
@@ -36,5 +37,5 @@
 
 ## 完了条件
 
-- サンプルのキャラクターを設定すると、記事の中で吹き出しが表示される
-- テンプレートの初期状態では吹き出し機能が無効になっている
+- サンプル記事の中で、`NAGORI`の吹き出しが表示される
+- `CHARACTERS`を空にすると、吹き出しが通常の引用として表示される
