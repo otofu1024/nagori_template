@@ -1,19 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400..800&display=swap");
+
 :root {
   --color-bg: #ffffff;
-  --color-surface: #fafafa;
-  --color-text: #222222;
-  --color-text-muted: #666666;
-  --color-border: #e5e5e5;
-  --color-accent: #8a8a8a;
-  --color-accent-secondary: #555555;
-  --color-link: #222222;
-  --color-link-hover: #000000;
+  --color-surface: #f7f9fb;
+  --color-text: #1e2a3f;
+  --color-text-muted: #5b6577;
+  --color-border: #e3e7ee;
+  --color-accent: #099dbe;
+  --color-accent-secondary: #1a7f5f;
+  --color-link: #0a7791;
+  --color-link-hover: #1e2a3f;
   --font-sans:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
+    "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
     "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
-  --og-bg: #f0f0f0;
-  --og-text: #222222;
-  --og-accent: #e0e0e0;
+  --og-bg: #e8f6fa;
+  --og-text: #1e2a3f;
+  --og-accent: #cfeff6;
 }
 
 :where(html) {
@@ -132,7 +134,7 @@
 }
 
 :where(.section-heading) {
-  border-bottom-color: #cccccc;
+  border-bottom-color: var(--color-border);
 }
 
 :where(.section-heading h2) {
@@ -141,7 +143,7 @@
 }
 
 :where(.post-row) {
-  border-color: #eeeeee;
+  border-color: var(--color-border);
   border-radius: 16px;
   background: var(--color-surface);
   transition:
@@ -167,21 +169,21 @@
 }
 
 :where(.auto-cover)::before {
-  border-color: rgb(0 0 0 / 10%);
+  border-color: rgb(30 42 63 / 10%);
   border-radius: 12px;
   background: rgb(255 255 255 / 88%);
 }
 
 :where(.auto-cover.daily) {
-  background: #f0f0f0;
+  background: #e8f6fa;
 }
 
 :where(.auto-cover.tech) {
-  background: #f0f0f0;
+  background: #e8f6fa;
 }
 
 :where(.auto-cover.review) {
-  background: #f0f0f0;
+  background: #e8f6fa;
 }
 
 :where(.auto-cover-title) {
@@ -220,15 +222,15 @@
 }
 
 :where(.category-label.daily) {
-  background: #e8e8e8;
+  background: #e8f6fa;
 }
 
 :where(.category-label.tech) {
-  background: #e8e8e8;
+  background: #e8f6fa;
 }
 
 :where(.category-label.review) {
-  background: #e8e8e8;
+  background: #e8f6fa;
 }
 
 :where(.post-main h3) {
@@ -243,7 +245,7 @@
 
 :where(.post-arrow) {
   border-radius: 50%;
-  background: #f0f0f0;
+  background: #e8f6fa;
   font-size: 1.25rem;
   text-decoration: none;
 }
@@ -279,11 +281,11 @@
 }
 
 :where(.article-toc__divider) {
-  border-top-color: #e0e0e0;
+  border-top-color: var(--color-border);
 }
 
 :where(.article-toc__list--root)::before {
-  background: #e0e0e0;
+  background: var(--color-border);
 }
 
 :where(.article-toc li) {
@@ -305,8 +307,8 @@
 }
 
 :where(.article-toc a:hover, .article-toc a:focus-visible) {
-  color: #000000;
-  background: #f5f5f5;
+  color: var(--color-text);
+  background: var(--color-surface);
 }
 
 :where(.article-toc a.is-active) {
@@ -314,7 +316,7 @@
 }
 
 :where(.article-toc__number) {
-  border-color: #e0e0e0;
+  border-color: var(--color-border);
   border-radius: 999px;
   background: var(--color-bg);
   color: var(--color-text-muted);
@@ -335,7 +337,7 @@
 }
 
 :where(.article-toc__reading-time) {
-  border-color: #e0e0e0;
+  border-color: var(--color-border);
   border-radius: 12px;
   background: rgb(255 255 255 / 72%);
   color: var(--color-text);
@@ -367,7 +369,7 @@
 }
 
 :where(.tag-list a) {
-  border-color: #dddddd;
+  border-color: var(--color-border);
   border-radius: 999px;
   background: var(--color-surface);
   color: var(--color-text-muted);
@@ -420,7 +422,7 @@
 :where(.prose blockquote) {
   border-left-color: var(--color-accent-secondary);
   border-radius: 0 8px 8px 0;
-  background: #f5f5f5;
+  background: var(--color-surface);
   color: var(--color-text);
 }
 
@@ -451,7 +453,7 @@
   background: var(--color-surface);
   color: var(--color-text);
   text-decoration: none;
-  box-shadow: 0 2px 8px rgb(0 0 0 / 5%);
+  box-shadow: 0 2px 8px rgb(30 42 63 / 5%);
   transition:
     transform 160ms ease,
     border-color 160ms ease,
@@ -460,7 +462,7 @@
 
 :where(.prose .link-card:hover) {
   border-color: color-mix(in srgb, var(--color-accent-secondary) 55%, var(--color-border));
-  box-shadow: 0 8px 20px rgb(0 0 0 / 10%);
+  box-shadow: 0 8px 20px rgb(30 42 63 / 10%);
   transform: translateY(-2px);
 }
 
@@ -483,11 +485,11 @@
 }
 
 :where(.prose .link-card__image) {
-  background: #f0f0f0;
+  background: #e8f6fa;
 }
 
 :where(.prose code:not(pre code)) {
-  background: #f0f0f0;
+  background: #e8f6fa;
   font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
   font-size: 0.9em;
 }
@@ -528,7 +530,7 @@
 
 :where(.article-pagination__link:hover) {
   border-color: var(--color-accent-secondary);
-  box-shadow: 0 6px 16px rgb(0 0 0 / 8%);
+  box-shadow: 0 6px 16px rgb(30 42 63 / 8%);
   transform: translateY(-2px);
 }
 
