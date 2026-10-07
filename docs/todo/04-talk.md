@@ -9,31 +9,31 @@
 
 ### 設定
 
-- [ ] `~/Downloads/nagori.png`(1254px四方、691KB)を256px四方に縮小し、`public/images/nagori/normal.png`に置く
-- [ ] `src/config.ts`に`CHARACTERS`を追加し、サンプルの`NAGORI`を1つ入れる
-- [ ] `astro.config.mjs`から、remarkプラグインに`CHARACTERS`を渡す
-- [ ] キャラクターのキーを英数字、`_`、`-`に限る
-- [ ] `NOTE`、`TIP`、`IMPORTANT`、`WARNING`、`CAUTION`をキーに使ったら設定エラーにする
-- [ ] 表情の別名が重複していたら設定エラーにする
+- [x] `~/Downloads/nagori.png`(1254px四方、691KB)を256px四方に縮小し、`public/images/nagori/normal.png`に置く
+- [x] `src/config.ts`に`CHARACTERS`を追加し、サンプルの`NAGORI`を1つ入れる
+- [x] `astro.config.mjs`から、remarkプラグインに`CHARACTERS`を渡す
+- [x] キャラクターのキーを英数字、`_`、`-`に限る
+- [x] `NOTE`、`TIP`、`IMPORTANT`、`WARNING`、`CAUTION`をキーに使ったら設定エラーにする
+- [x] 表情の別名が重複していたら設定エラーにする
 
 ### 記法と出力
 
-- [ ] 引用の先頭の`[!キー 表情]`を読み取る。キーは大文字にそろえて照合する
-- [ ] 表情は小文字にそろえ、末尾の`!！?？`を取り除いてから照合する
-- [ ] 表情を省略したら`defaultExpression`を使う
-- [ ] 設定にないマーカーは、通常の引用として表示する
-- [ ] 登録済みのキャラクターで未知の表情が指定されたら、警告を出して元の内容を残す
-- [ ] 出力を`<aside class="talk" data-character data-expression>`、`.talk__character`、`.talk__bubble`の形にする
-- [ ] `data-expression`には、記事で使った別名ではなく正規のキーを入れる
-- [ ] 画像の寸法やlazy読み込みは、既存の`rehype-responsive-images.mjs`の処理に任せる
-- [ ] `CHARACTERS`が空なら、プラグインは何もしない
-- [ ] 別名、表情の省略、未知の指定、吹き出し内のMarkdownの保持を確かめる小さなテストを1つ書く
+- [x] 引用の先頭の`[!キー 表情]`を読み取る。キーは大文字にそろえて照合する
+- [x] 表情は小文字にそろえ、末尾の`!！?？`を取り除いてから照合する
+- [x] 表情を省略したら`defaultExpression`を使う
+- [x] 設定にないマーカーは、通常の引用として表示する
+- [x] 登録済みのキャラクターで未知の表情が指定されたら、警告を出して元の内容を残す
+- [x] 出力を`<aside class="talk" data-character data-expression>`、`.talk__character`、`.talk__bubble`の形にする
+- [x] `data-expression`には、記事で使った別名ではなく正規のキーを入れる
+- [x] 画像の寸法やlazy読み込みは、既存の`rehype-responsive-images.mjs`の処理に任せる
+- [x] `CHARACTERS`が空なら、プラグインは何もしない
+- [x] 別名、表情の省略、未知の指定、吹き出し内のMarkdownの保持を確かめる小さなテストを1つ書く
 
 ### 見た目
 
-- [ ] 吹き出しの左右の配置とスマホでの列構成をテンプレート側のCSSに書く
-- [ ] 吹き出しの色、枠、角丸、尾の形をsimpleテーマに書く
-- [ ] `docs/markdown-guide.md`に記法の説明を足す
+- [x] 吹き出しの左右の配置とスマホでの列構成をテンプレート側のCSSに書く
+- [x] 吹き出しの色、枠、角丸、尾の形をsimpleテーマに書く
+- [x] `docs/markdown-guide.md`に記法の説明を足す
 
 ## 完了条件
 

@@ -32,3 +32,15 @@ export type Category = keyof typeof CATEGORIES;
 
 // z.enum に渡せるよう、少なくとも1要素を持つタプル型としてキー一覧を公開する
 export const CATEGORY_KEYS = Object.keys(CATEGORIES) as [Category, ...Category[]];
+
+// キャラクター吹き出しの設定。空のオブジェクトにすると機能が無効になる。
+// astro.config.mjs からも Node で直接 import されるため、型を消すだけで動く構文だけを使うこと。
+export const CHARACTERS = {
+  NAGORI: {
+    name: "なごり",
+    defaultExpression: "normal",
+    expressions: {
+      normal: { src: "/images/nagori/normal.png", label: "通常", aliases: ["通常"] },
+    },
+  },
+};
