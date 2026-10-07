@@ -60,8 +60,7 @@ gridの列構成、`position: sticky`、ブレークポイント、日本語の�
 | パス | 持ち主 | 内容 |
 |---|---|---|
 | `src/styles/template.css` | テンプレート | 全体を`@layer template`の1層で包んだテンプレートのCSS |
-| `src/theme/theme.css` | 利用者 | AIが編集する唯一のCSS。レイヤーの外で読み込む |
-| `themes/simple.css` | テンプレート | 標準テーマの見本。テンプレートの初期状態の`theme.css`と同じ内容 |
+| `src/theme/theme.css` | 利用者 | AIが編集する唯一のCSS。レイヤーの外で読み込む。初期状態は標準テーマのsimple |
 | `src/config.ts` | 利用者 | サイト名、説明、著者、カテゴリー、キャラクター |
 | `astro.config.mjs` | 利用者 | サイトURLなどAstroの設定 |
 | `src/content/` | 利用者 | 記事 |
@@ -84,25 +83,33 @@ gridの列構成、`position: sticky`、ブレークポイント、日本語の�
 トークンは実際に変えたい役割だけに絞った13個です。
 細かい色の違い、角丸、影、余白、カテゴリー色はトークンにしません。`theme.css`の中でセレクタを書いて指定します。
 
-今の値は、元のブログの配色を消すために置いた仮の無彩色です。正式な値は02でsimpleテーマを作るときに決めます。
+標準テーマのsimpleは、白地に濃紺の文字を基本にし、ロゴのシアンを差し色に使います。
+表の値は02で使う初めの値です。文字と背景のコントラスト比がWCAG AAを満たさない組み合わせがあれば、02で調整します。
 
-| トークン | 役割 | 今の仮の値 |
+| トークン | 役割 | simpleの値 |
 |---|---|---|
 | `--color-bg` | ページの背景 | `#ffffff` |
-| `--color-surface` | 記事カード、リンクカード、タグの背景 | `#fafafa` |
-| `--color-text` | 基本の文字色 | `#222222` |
-| `--color-text-muted` | 説明、日付などの補助情報 | `#666666` |
-| `--color-border` | 基本の区切り線 | `#e5e5e5` |
-| `--color-accent` | ナビと目次の選択中表示、検索結果のmark、focus枠 | `#8a8a8a` |
-| `--color-accent-secondary` | 引用の線、カードhover時の枠などの補助的な強調 | `#555555` |
-| `--color-link` | 本文のリンク | `#222222` |
-| `--color-link-hover` | 本文リンクのhoverとfocus | `#000000` |
-| `--font-sans` | 本文とUIのフォント | 日本語向けのシステムフォントのスタック |
-| `--og-bg` | OGP画像の背景 | `#f0f0f0` |
-| `--og-text` | OGP画像の文字 | `#222222` |
-| `--og-accent` | OGP画像の強調色 | `#e0e0e0` |
+| `--color-surface` | 記事カード、リンクカード、タグの背景 | `#f7f9fb` |
+| `--color-text` | 基本の文字色 | `#1e2a3f` |
+| `--color-text-muted` | 説明、日付などの補助情報 | `#5b6577` |
+| `--color-border` | 基本の区切り線 | `#e3e7ee` |
+| `--color-accent` | ナビと目次の選択中表示、検索結果のmark、focus枠 | `#0aa5c8` |
+| `--color-accent-secondary` | 引用の線、カードhover時の枠などの補助的な強調 | `#2bb88a` |
+| `--color-link` | 本文のリンク | `#0b7f9c` |
+| `--color-link-hover` | 本文リンクのhoverとfocus | `#1e2a3f` |
+| `--font-sans` | 本文とUIのフォント | `"Noto Sans JP"`と日本語向けのシステムフォント |
+| `--og-bg` | OGP画像の背景 | `#e8f6fa` |
+| `--og-text` | OGP画像の文字 | `#1e2a3f` |
+| `--og-accent` | OGP画像の強調色 | `#cfeff6` |
 
-`--color-link`と`--color-link-hover`はまだCSSにありません。01で追加します。
+### フォント
+
+フォントはGoogle Fontsから配信し、`theme.css`の先頭に`@import`を1行書いて読み込みます。
+Google Fontsは文字の範囲ごとに分けて配信するので、ページで使った文字の分だけ読み込まれます。
+フォントを変えるときは、この1行と`--font-sans`を書き換えます。
+
+CSSの`@import`はファイルの先頭にないと無視されます。そのため`BaseLayout.astro`では、`theme.css`を`template.css`より先に読み込みます。
+テンプレート側は`@layer template`に入っているので、読み込む順番を入れ替えても優先順位は変わりません。
 
 ### 契約
 
@@ -209,6 +216,8 @@ PC幅とスマホ幅で全種類のページを見て、検索結果、目次の
 | `data-category`属性と`color-mix()`による色の自動生成 | 既存のカテゴリークラスで足り、自動生成した色は文字の読みやすさを保証できない |
 | `theme.css`全体をCSSパーサーで解析してOGPの色を取る | `var()`、後続の上書き、メディアクエリまで評価しないと画面の最終色にならない |
 | 契約をJSONで管理し、Markdownを生成する | JSON、生成スクリプト、整合性の検査が必要になり、MVPには重い |
+| 標準テーマの見本を`themes/simple.css`として別に置く | 初期状態の`theme.css`と同じ内容になり、元に戻すだけならgitで足りる |
+| Noto Sans JPをnpmパッケージから自前で配信する | 文字の範囲ごとに分割されておらず、太さ1つにつき約1MBを読み込むことになる |
 
 ## 作業手順
 
@@ -227,4 +236,3 @@ PC幅とスマホ幅で全種類のページを見て、検索結果、目次の
 
 - テンプレートの名前。nagoriを仮の名前にしている
 - ライセンス。コードはMITなどを想定している
-- simpleテーマの具体的なデザイン
