@@ -1129,7 +1129,7 @@ input:focus-visible {
     padding-inline: 2.5rem;
   }
 
-  .post-row {
+  .post-row-link {
     grid-template-columns: 14rem minmax(0, 1fr) 3.25rem;
     gap: 1.5rem;
   }
