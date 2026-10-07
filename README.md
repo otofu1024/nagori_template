@@ -4,6 +4,10 @@
 
 仕様と開発の方針は`docs/template-mvp.md`にあります。
 
+見た目をAIに頼むときのルールは`AGENTS.md`にあります。
+
+使えるトークンとセレクタは`docs/theme-contract.md`にあります。
+
 ## 使い方
 
 ```sh
