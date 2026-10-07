@@ -93,9 +93,9 @@ gridの列構成、`position: sticky`、ブレークポイント、日本語の�
 | `--color-text` | 基本の文字色 | `#1e2a3f` |
 | `--color-text-muted` | 説明、日付などの補助情報 | `#5b6577` |
 | `--color-border` | 基本の区切り線 | `#e3e7ee` |
-| `--color-accent` | ナビと目次の選択中表示、検索結果のmark、focus枠 | `#0aa5c8` |
-| `--color-accent-secondary` | 引用の線、カードhover時の枠などの補助的な強調 | `#2bb88a` |
-| `--color-link` | 本文のリンク | `#0b7f9c` |
+| `--color-accent` | ナビと目次の選択中表示、検索結果のmark、focus枠 | `#099dbe` |
+| `--color-accent-secondary` | 引用の線、カードhover時の枠などの補助的な強調 | `#1a7f5f` |
+| `--color-link` | 本文のリンク | `#0a7791` |
 | `--color-link-hover` | 本文リンクのhoverとfocus | `#1e2a3f` |
 | `--font-sans` | 本文とUIのフォント | `"Noto Sans JP"`と日本語向けのシステムフォント |
 | `--og-bg` | OGP画像の背景 | `#e8f6fa` |
