@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import satori from 'satori';
 import sharp from 'sharp';
+import { readOgColors } from '../../lib/og-colors.mjs';
 import { CATEGORIES, type Category } from '../../config';
 import { getPublishedPosts, postSlug } from '../../lib/posts';
 
@@ -33,11 +34,8 @@ function h(type: string, props: Record<string, unknown>, ...children: SatoriChil
 const WIDTH = 1200;
 const HEIGHT = 630;
 
-const categoryColors: Record<Category, { outer: string; badge: string }> = {
-  daily: { outer: '#F0F0F0', badge: '#E0E0E0' },
-  tech: { outer: '#F0F0F0', badge: '#E0E0E0' },
-  review: { outer: '#F0F0F0', badge: '#E0E0E0' },
-};
+// 色は theme.css の --og-* から読む。足りない・形式が違うときはここで throw してビルドが止まる
+const colors = readOgColors(await readFile(resolve('src/theme/theme.css'), 'utf-8'));
 
 const font = readFile(
   resolve(
@@ -83,7 +81,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const GET: APIRoute<OGPage> = async ({ props }) => {
-  const colors = categoryColors[props.category];
   const image = h(
     'div',
     {
@@ -93,7 +90,7 @@ export const GET: APIRoute<OGPage> = async ({ props }) => {
         height: '100%',
         display: 'flex',
         padding: 34,
-        background: colors.outer,
+        background: colors.accent,
         fontFamily: 'Noto Sans JP',
       },
     },
@@ -108,10 +105,10 @@ export const GET: APIRoute<OGPage> = async ({ props }) => {
           alignItems: 'center',
           justifyContent: 'center',
           padding: '86px 100px 118px',
-          border: '2px solid rgba(0, 0, 0, 0.10)',
+          border: `2px solid ${colors.text}1A`,
           borderRadius: 30,
-          background: '#FFFFFF',
-          color: '#222222',
+          background: colors.bg,
+          color: colors.text,
         },
       },
       h(
@@ -145,7 +142,8 @@ export const GET: APIRoute<OGPage> = async ({ props }) => {
             alignItems: 'center',
             padding: '10px 24px',
             borderRadius: 999,
-            background: colors.badge,
+            background: colors.accent,
+            color: colors.text,
             fontSize: 28,
             fontWeight: 700,
           },
