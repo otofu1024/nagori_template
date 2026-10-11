@@ -24,6 +24,8 @@ Claude CodeやCursorなどのAIに「見た目を〇〇にして」と頼んで�
 ## 設定
 
 - サイト名、説明、著者、カテゴリー、キャラクターは`src/config.ts`で設定します
+- トップの文章と画像は`src/config.ts`の`HERO`で設定します
+- 記事以外のページのOGP画像は`src/config.ts`の`SITE.image`で設定します
 - サイトのURLは`astro.config.mjs`の`site`で設定します。環境変数`SITE_URL`でも上書きできます
 
 ## 記事を書く
