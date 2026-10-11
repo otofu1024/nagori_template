@@ -41,6 +41,8 @@
 |---|---|
 | `.hero` | ヒーロー全体 |
 | `.hero-copy` | ヒーローの文章。中の`h1`と`> p`を使える |
+| `.hero-art` | ヒーロー画像の領域。`::before`と`::after`を装飾に使える |
+| `.hero-image` | ヒーロー画像 |
 | `.hero-title-rule` | タイトル下の線 |
 | `.hero-cta` | 記事一覧へのリンク |
 | `.section-heading` | 「最近の記事」などの節の見出し。中の`h2`を使える |

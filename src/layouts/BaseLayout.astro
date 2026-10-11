@@ -20,7 +20,7 @@ interface Props {
 const {
   title = SITE.title,
   description = SITE.description,
-  image = null,
+  image = SITE.image ?? null,
   imageAlt,
   imageWidth,
   imageHeight,

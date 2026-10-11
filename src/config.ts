@@ -1,8 +1,31 @@
-export const SITE = {
+export const SITE: {
+  title: string;
+  description: string;
+  author: string;
+  image?: string;
+} = {
   title: "nagori",
   description: "日本語で書くためのAstroブログテンプレート。",
   author: "nagori",
+  // 記事以外のページのOGP画像。public/からのパス。省略できる
+  // image: "/og.png",
 } as const;
+
+export interface Hero {
+  lead?: string[];
+  image?: {
+    src: string;
+    width: number;
+    height: number;
+    alt: string;
+  };
+}
+
+// トップのヒーロー。どの項目も省略できる
+export const HERO: Hero = {
+  // lead: ["1行目の文章", "2行目の文章"],
+  // image: { src: "/images/hero.png", width: 531, height: 948, alt: "画像の説明" },
+};
 
 // カテゴリーの唯一の定義元。
 // スキーマ（content.config.ts）、ナビゲーション、about ページはここから生成する。
