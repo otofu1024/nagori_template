@@ -294,6 +294,12 @@
     margin-top: 5rem;
     padding: 0.25rem 0.15rem 0.5rem;
     overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+  }
+
+  .article-toc:hover, .article-toc:focus-within {
+    scrollbar-color: color-mix(in srgb, var(--color-text-muted) 45%, transparent) transparent;
   }
 
   .article-toc__heading {
