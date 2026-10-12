@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import satori from 'satori';
 import sharp from 'sharp';
 import { readOgColors } from '../../lib/og-colors.mjs';
-import { CATEGORIES, type Category } from '../../config';
+import { CATEGORIES, CATEGORY_KEYS, type Category } from '../../config';
 import { getPublishedPosts, postSlug } from '../../lib/posts';
 
 type OGPage = {
@@ -35,7 +35,7 @@ const WIDTH = 1200;
 const HEIGHT = 630;
 
 // 色は theme.css の --og-* から読む。足りない・形式が違うときはここで throw してビルドが止まる
-const colors = readOgColors(await readFile(resolve('src/theme/theme.css'), 'utf-8'));
+const colors = readOgColors(await readFile(resolve('src/theme/theme.css'), 'utf-8'), CATEGORY_KEYS);
 
 const font = readFile(
   resolve(
@@ -81,6 +81,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const GET: APIRoute<OGPage> = async ({ props }) => {
+  const accent = colors.categories[props.category];
   const image = h(
     'div',
     {
@@ -90,7 +91,7 @@ export const GET: APIRoute<OGPage> = async ({ props }) => {
         height: '100%',
         display: 'flex',
         padding: 34,
-        background: colors.accent,
+        background: accent,
         fontFamily: 'Noto Sans JP',
       },
     },
@@ -142,7 +143,7 @@ export const GET: APIRoute<OGPage> = async ({ props }) => {
             alignItems: 'center',
             padding: '10px 24px',
             borderRadius: 999,
-            background: colors.accent,
+            background: accent,
             color: colors.text,
             fontSize: 28,
             fontWeight: 700,

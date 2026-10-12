@@ -16,6 +16,9 @@
   --og-bg: #ffffff;
   --og-text: #1e2a3f;
   --og-accent: #cfeff6;
+  --og-accent-daily: #dcf1e4;
+  --og-accent-tech: #cfeff6;
+  --og-accent-review: #f8e9c8;
   /* コードブロックの配色。Astroの css-variables テーマが読む */
   --astro-code-foreground: #1e2a3f;
   --astro-code-background: var(--color-surface);

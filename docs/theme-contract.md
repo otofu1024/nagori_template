@@ -21,6 +21,7 @@
 | `--og-bg` | OGP画像の背景 |
 | `--og-text` | OGP画像の文字 |
 | `--og-accent` | OGP画像の強調色 |
+| `--og-accent-<キー>` | カテゴリー別のOGP画像の強調色。省略時は`--og-accent`を使う |
 | `--astro-code-foreground`、`--astro-code-background` | コードブロックの文字色と背景 |
 | `--astro-code-token-comment`、`-keyword`、`-string`、`-string-expression`、`-constant`、`-function`、`-parameter`、`-punctuation`、`-link` | コードブロックの構文の色 |
 
@@ -212,7 +213,7 @@ URLだけの行から作るカードです。`.prose`の下に出ます。
 
 ## OGP画像の色
 
-`--og-bg`、`--og-text`、`--og-accent`は、`theme.css`の最初の`:root`に`#RRGGBB`形式で1回ずつ書きます。ビルド時に正規表現で読むので、`var()`や`color-mix()`は使えません。値が足りないか不正だと、ビルドがエラーで止まります。
+`--og-bg`、`--og-text`、`--og-accent`と、必要な`--og-accent-<キー>`は、`theme.css`の最初の`:root`に`#RRGGBB`形式で1回ずつ書きます。カテゴリー別の色を省略すると`--og-accent`を使います。ビルド時に正規表現で読むので、`var()`や`color-mix()`は使えません。必須色が足りないか、書いた色が重複または不正だと、ビルドがエラーで止まります。
 
 ## フォントを変えるとき
 
